@@ -9,7 +9,15 @@ function emptyOrRows(rows) {
     return rows;
 }
 
+function emptyOrObject(rows) {
+    if (!rows) {
+        return undefined;
+    }
+    return rows[0];
+}
+
 module.exports = {
     getOffset,
+    emptyOrObject,
     emptyOrRows
 }

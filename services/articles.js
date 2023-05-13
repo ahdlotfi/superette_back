@@ -17,6 +17,19 @@ async function getMultiple(page = 1) {
     }
 }
 
+async function getOne(id) {
+    const rows = await db.query(
+        `SELECT * 
+            FROM article WHERE id=?`
+        , [id]);
+    const data = helper.emptyOrObject(rows);
+    console.log(data)
+
+    return {
+        data,
+    }
+}
+
 async function create(article) {
     const result = await db.query(
         `INSERT INTO article 
@@ -36,7 +49,27 @@ async function create(article) {
     return { message, success };
 }
 
+async function update(article) {
+    const result = await db.query(
+        `UPDATE article 
+      SET designation=? ,prix=? ,qte_stock=? 
+      WHERE id=? `
+        , [article.designation, article.prix, article.qte_stock, article.id]);
+
+    let message = 'Error in updating the article';
+    let success = false;
+
+    if (result.affectedRows) {
+        message = 'Article updated successfully';
+        success = true;
+    }
+
+    return { message, success };
+}
+
 module.exports = {
     getMultiple,
+    getOne,
+    update,
     create
 }
