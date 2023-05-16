@@ -6,7 +6,7 @@ async function getMultiple(page = 1) {
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(
         `SELECT * 
-            FROM article LIMIT ?,?`
+            FROM tp4_article LIMIT ?,?`
         , [offset, config.listPerPage]);
     const data = helper.emptyOrRows(rows);
     const meta = { page };
@@ -20,7 +20,7 @@ async function getMultiple(page = 1) {
 async function getOne(id) {
     const rows = await db.query(
         `SELECT * 
-            FROM article WHERE id=?`
+            FROM tp4_article WHERE id=?`
         , [id]);
     const data = helper.emptyOrObject(rows);
     console.log(data)
@@ -32,7 +32,7 @@ async function getOne(id) {
 
 async function create(article) {
     const result = await db.query(
-        `INSERT INTO article 
+        `INSERT INTO tp4_article 
       (designation,prix,qte_stock) 
       VALUES 
       (?, ?, ?)`
@@ -51,7 +51,7 @@ async function create(article) {
 
 async function update(article) {
     const result = await db.query(
-        `UPDATE article 
+        `UPDATE tp4_article 
       SET designation=? ,prix=? ,qte_stock=? 
       WHERE id=? `
         , [article.designation, article.prix, article.qte_stock, article.id]);
