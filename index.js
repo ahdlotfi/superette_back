@@ -2,6 +2,8 @@ const express = require("express");
 var cors = require('cors')
 var bodyParser = require('body-parser')
 const articles = require("./routes/articles");
+const clients = require("./routes/clients");
+const factures = require("./routes/factures");
 
 const app = express();
 
@@ -28,6 +30,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/articles", articles);
+app.use("/clients", clients);
+app.use("/factures", factures);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

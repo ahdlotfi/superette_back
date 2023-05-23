@@ -31,6 +31,7 @@ async function getOne(id) {
 }
 
 async function create(article) {
+    // console.log('Article *********** : ' + article)
     const result = await db.query(
         `INSERT INTO tp4_article 
       (designation,prix,qte_stock) 
@@ -46,7 +47,7 @@ async function create(article) {
         success = true;
     }
 
-    return { message, success };
+    return { message, success, insertId: result.insertId };
 }
 
 async function update(article) {

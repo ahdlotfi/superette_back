@@ -25,7 +25,7 @@ router.get('/:id', async function (req, res, next) {
 
 router.post('/', async function (req, res, next) {
 
-    console.log('request : ', req)
+    //console.log('request : ', req)
     try {
         res.json(await articles.create(req.body));
     } catch (err) {
@@ -40,7 +40,7 @@ router.put('/', async function (req, res, next) {
     try {
         res.json(await articles.update(req.body));
     } catch (err) {
-        console.error(`Error while creating the article`, err.message);
+        console.error(`Error while updating the article`, err.message);
         next(err);
     }
 });
