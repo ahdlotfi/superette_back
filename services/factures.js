@@ -99,7 +99,6 @@ async function update(facture) {
     if (result.affectedRows) {
         message = 'Order updated successfully';
         success = true;
-        const id = result.insertId;
         for (let i = 0; i < facture.lignes.length; i++) {
             const ligne = facture.lignes[i];
             if (ligne.type === 'NEW') {
@@ -107,7 +106,7 @@ async function update(facture) {
                     `INSERT INTO tp4_ligne_facture 
                   (id_facture,id_article,qte,prix) 
                   VALUES (?,?,?,?)`
-                    , [id, ligne.id_article, ligne.qte, ligne.prix]);
+                    , [ligne.id_facture, ligne.id_article, ligne.qte, ligne.prix]);
             }
             if (ligne.type === 'EDIT') {
                 await db.query(
